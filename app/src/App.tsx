@@ -1,29 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useQuery, gql } from '@apollo/client';
 
+
+const GET_PRODUCTS = gql`
+  query GetProducts {
+    locations {
+      id
+      name
+      description
+      photo
+    }
+  }
+`;
+
+const GET_USERS = gql`
+  query GetUsers {
+    locations {
+      id
+      name
+      description
+      photo
+    }
+  }
+`;
 function App() {
-    const [count, setCount] = useState(0)
-
+    const [logIn, setLogIn] = useState(false)
+    const openLogin = () => {
+        setLogIn(!logIn);
+    }
     return (
         <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
+            <h1>Home Page</h1>
             <div className="card">
-                <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
+                <button onClick={openLogin}>Login</button>
             </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+            <p className="read-the-docs">Sign in to view product list</p>
         </>
     )
 }
